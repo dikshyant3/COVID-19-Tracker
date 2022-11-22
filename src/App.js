@@ -13,7 +13,15 @@ import InfoBox from "./components/InfoBox";
 function App() {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState("worldwide");
+  const [countryInfo, setCountryInfo] = useState({});
 
+  useEffect(() => {
+    fetch("https://disease.sh/v3/covid-19/all")
+      .then((response) => response.json())
+      .then((data) => {
+        setCountryInfo(data);
+      });
+  }, []);
   useEffect(() => {
     const getCountriesData = async () => {
       await fetch("https://disease.sh/v3/covid-19/countries")
@@ -29,12 +37,24 @@ function App() {
     getCountriesData();
   }, []);
 
-  const onCountryChange = (event) => {
+  const onCountryChange = async (event) => {
+    // countryCode here means name of the country
     const countryCode = event.target.value;
     // console.log("from >>>>", country);
     // Note: In console it gives iso name of country whereas it shows full name in the MenuItem this is because our MenuItem has the value of isoCode of country and MenuItem shows the full name
     setCountry(countryCode);
+    const url =
+      countryCode === "worldwide"
+        ? "https://disease.sh/v3/covid-19/all"
+        : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
+    await fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        setCountry(countryCode);
+        setCountryInfo(data);
+      });
   };
+  console.log("CountryInfo >>>>", countryInfo);
   return (
     <div className="app">
       <div className="app__left">
@@ -56,9 +76,21 @@ function App() {
         {/* Header */}
         {/* Title+Dropdown */}
         <div className="app__stats">
-          <InfoBox title="Coronavirus Cases" cases="+2500" total="1.2M" />
-          <InfoBox title="Recovered" cases="+2500" total="1.2M" />
-          <InfoBox title="Deaths" cases="+2500" total="1.2M" />
+          <InfoBox
+            title="Coronavirus Cases"
+            cases={countryInfo.todayCases}
+            total={countryInfo.cases}
+          />
+          <InfoBox
+            title="Recovered"
+            cases={countryInfo.todayRecovered}
+            total={countryInfo.recovered}
+          />
+          <InfoBox
+            title="Deaths"
+            cases={countryInfo.todayDeaths}
+            total={countryInfo.deaths}
+          />
         </div>
         {/* InfoBoxs */}
         {/* InfoBoxs */}
