@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import { FormControl, MenuItem, Select } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  FormControl,
+  MenuItem,
+  Select,
+} from "@mui/material";
 import InfoBox from "./components/InfoBox";
 
 // 'https://disease.sh/v3/covid-19/countries'
@@ -58,11 +64,16 @@ function App() {
         {/* InfoBoxs */}
         {/* InfoBoxs */}
 
-        {/* Table of countries */}
-        {/* Graph */}
-
         {/* Map */}
       </div>
+      <Card className="app__right">
+        {/* Table of countries */}
+        {/* Graph */}
+        <CardContent>
+          <h3>Live Cases by Country</h3>
+          <h3>Worldwide new cases</h3>
+        </CardContent>
+      </Card>
     </div>
   );
 }
