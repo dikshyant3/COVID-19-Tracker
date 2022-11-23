@@ -1,6 +1,6 @@
 import React from "react";
-import { Card, CardContent, Typography } from "@mui/material";
 import "./InfoBox.css";
+import { Card, CardContent, Typography } from "@mui/material";
 
 function InfoBox({ title, cases, total, active, isRed, ...props }) {
   console.log(title, active);
