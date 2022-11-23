@@ -10,7 +10,12 @@ import {
 import InfoBox from "./components/InfoBox";
 import Table from "./components/Table";
 import { sortData } from "./util";
+import "leaflet/dist/leaflet.css";
+// import { Chart as ChartJS } from "chart.js/auto";
+
 import LineGraph from "./components/LineGraph";
+import Map from "./components/Map";
+// import numeral from "numeral";
 
 // 'https://disease.sh/v3/covid-19/countries'
 function App() {
@@ -18,6 +23,7 @@ function App() {
   const [country, setCountry] = useState("worldwide");
   const [countryInfo, setCountryInfo] = useState({});
   const [tableData, setTableData] = useState([]);
+  // const [casesType, setCasesType] = useState("cases");
 
   useEffect(() => {
     fetch("https://disease.sh/v3/covid-19/all")
@@ -103,6 +109,7 @@ function App() {
         {/* InfoBoxs */}
 
         {/* Map */}
+        <Map />
       </div>
       <Card className="app__right">
         {/* Table of countries */}

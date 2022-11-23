@@ -1,0 +1,11 @@
+.map {
+  height: 500px;
+  padding: 1rem;
+  background: #ffffff;
+  box-shadow: 0 0 8px -4px rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  margin-top: 1rem;
+}
+.map .leaflet-container {
+  height: 100%;
+}
